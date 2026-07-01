@@ -1,0 +1,911 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="AdminMaster.master.cs" Inherits="Admin_AdminMaster" %>
+<!DOCTYPE html>
+<html>
+    <head runat="server">
+        <title>PayBingo CMS</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            /*  body  */
+            body{
+                background:linear-gradient(135deg,#dbeafe,#e0f2fe,#f0f9ff);
+                font-family:Segoe UI;
+
+            }
+            /*  SIDEBAR  */
+            .sidebar{
+    width:240px;
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    background:linear-gradient(180deg,#0f172a,#020617);
+    transition:.3s;
+    z-index:10000;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+
+            /* collapsed */
+.sidebar.collapsed{
+    transform:translateX(-240px);
+}
+
+            
+
+            body.collapsed-layout .header,
+body.collapsed-layout .content{
+    margin-left:0;
+}
+   
+            .content{
+                animation:fadeIn .4s ease;
+
+            }
+            @keyframes fadeIn{
+                from{
+                    opacity:0;
+                    transform:translateY(8px);}
+                to{
+                    opacity:1;
+                    transform:translateY(0);}
+
+            }
+            /* sidebar header */
+            .sidebar-header{
+                height:60px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                font-size:22px;
+                font-weight:700;
+                border-bottom:1px solid rgba(255,255,255,.1);
+                letter-spacing:.5px;
+
+            }
+            /* sidebar links */
+            .sidebar a{
+                display:flex;
+                align-items:center;
+                gap:12px;
+                padding:12px 18px;margin:6px 12px;
+                border-radius:10px;
+                color:#cbd5e1;
+                text-decoration:none;
+                font-size:15px;
+                transition:.2s;
+
+            }
+            .sidebar a i{
+                width:20px;
+                text-align:center;
+
+            }
+            .sidebar a:hover{
+                background:#1e293b;
+                color:white;
+                transform:translateX(3px);
+
+            }
+           
+            
+            /* section titles */
+            .menu-title{
+                font-size:11px;
+                text-transform:uppercase;
+                opacity:.6;
+                margin:18px 20px 6px;
+
+            }
+            /*  SUBMENU  */
+            .submenu{
+                max-height:0;
+                overflow:hidden;
+                transition:max-height .4s ease;
+                margin-left:10px;
+
+            }
+            .submenu a{
+                font-size:14px;
+                padding:10px 15px;
+                background:#020617;
+
+            }
+            .submenu.show{
+                max-height:1000px;
+
+            }
+            .sidebar a{
+                flex-shrink:0;
+
+            }
+            /* hide scrollbar */
+            .sidebar::-webkit-scrollbar{
+                width:0px;
+
+            }
+            .sidebar::-webkit-scrollbar{
+                width:6px;
+
+            }
+            
+            .sidebar::-webkit-scrollbar-thumb{
+                background:#334155;
+                border-radius:10px;
+
+            }
+            .sidebar::-webkit-scrollbar-thumb:hover{
+                background:#475569;
+
+            }
+            
+            /* arrow rotate */
+            
+            .arrow{
+                transition:.3s;
+
+            }
+            
+            .rotate{
+                transform:rotate(180deg);
+
+            }
+            
+            /* ===== HEADER ===== */
+            
+            .header{
+                
+                height:60px;
+                background:linear-gradient(90deg,#1e293b,#0f172a);
+                color:white;
+                display:flex;
+                align-items:center;
+                
+                padding:0 25px;
+                box-shadow:0 4px 15px rgba(0,0,0,.25);
+                margin-left:240px;
+                transition:.35s ease;
+                gap:15px;
+
+            }
+            
+            
+            
+            /* header right */
+            
+            .header-right{
+                display:flex;
+                align-items:center;
+                gap:15px;
+
+            }
+            .search-input{
+                width:230px;
+                height:36px;
+                border-radius:25px;
+                border:none;
+                padding:0 15px;
+                outline:none;
+
+            }
+
+            .sidebar a.active{
+    background:#0ea5e9;
+    color:white;
+}
+            
+            /* ===== CONTENT ===== */
+            
+    .header, .content{
+    margin-left:240px;
+    transition:.3s;
+}
+            
+            
+            .sidebar::after{
+                content:"";
+                position:absolute;
+                top:0;
+                right:-6px;
+                width:6px;
+                height:100%;
+                background:#0ea5e9;
+                border-radius:0 5px 5px 0;
+
+            }
+            
+            /* ===== DASHBOARD CARDS ===== */
+
+
+
+.dash-card:hover{
+
+transform:translateY(-6px) scale(1.02);
+
+box-shadow:
+0 25px 60px rgba(0,0,0,.25),
+inset 0 1px 3px rgba(255,255,255,.4);
+
+}
+
+.dash-card span{
+font-size:14px;
+opacity:.85;
+}
+
+.dash-card h2{
+font-size:36px;
+font-weight:700;
+margin-top:8px;
+}
+
+.dash-card:hover{
+transform:translateY(-8px) scale(1.02);
+
+box-shadow:
+0 18px 45px rgba(0,0,0,0.25),
+inset 0 1px 2px rgba(255,255,255,0.4);
+}
+
+.dash-card::before{
+content:"";
+position:absolute;
+
+top:-50%;
+left:-50%;
+
+width:200%;
+height:200%;
+
+background:linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,0.25),
+transparent
+);
+
+transform:rotate(25deg);
+pointer-events:none;
+
+opacity:.6;
+}
+
+.blue{
+background:linear-gradient(135deg,rgba(59,130,246,.85),rgba(30,64,175,.85));
+}
+
+.green{
+background:linear-gradient(135deg,rgba(34,197,94,.85),rgba(22,101,52,.85));
+}
+
+.purple{
+background:linear-gradient(135deg,rgba(139,92,246,.85),rgba(91,33,182,.85));
+}
+
+.orange{
+background:linear-gradient(135deg,rgba(249,115,22,.85),rgba(194,65,12,.85));
+}
+
+.teal{
+background:linear-gradient(135deg,rgba(20,184,166,.85),rgba(15,118,110,.85));
+}
+
+.table-card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.dash-card span{
+font-size:14px;
+opacity:.85;
+letter-spacing:.5px;
+}
+
+.dash-card h2{
+font-size:36px;
+font-weight:700;
+margin-top:10px;
+}
+.table-card{
+background:rgba(255,255,255,0.55);
+
+backdrop-filter:blur(16px);
+-webkit-backdrop-filter:blur(16px);
+
+border:1px solid rgba(255,255,255,.6);
+
+padding:25px;
+border-radius:18px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+/* colors */
+
+.blue{
+background:linear-gradient(135deg,#3b82f6,#1e40af);
+}
+
+.green{
+background:linear-gradient(135deg,#22c55e,#166534);
+}
+
+.purple{
+background:linear-gradient(135deg,#8b5cf6,#5b21b6);
+}
+
+.orange{
+background:linear-gradient(135deg,#f97316,#c2410c);
+}
+
+.teal{
+background:linear-gradient(135deg,#14b8a6,#0f766e);
+}
+
+.table-card{
+background:white;
+padding:25px;
+border-radius:16px;
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+transition:.3s;
+}
+
+.table-card:hover{
+box-shadow:0 12px 35px rgba(0,0,0,0.12);
+}
+
+.btn-light{
+border-radius:8px;
+padding:6px 14px;
+font-weight:600;
+}
+
+.btn-light:hover{
+background:#f1f5f9;
+}
+
+
+.live-feed{
+overflow:hidden;
+background:#0f172a;
+border-radius:10px;
+padding:10px 0;
+position:relative;
+}
+
+.feed-track{
+display:flex;
+gap:40px;
+white-space:nowrap;
+animation:scrollFeed 20s linear infinite;
+color:white;
+font-size:14px;
+padding-left:20px;
+}
+
+.feed-item{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.feed-success{
+color:#22c55e;
+font-weight:600;
+}
+
+.feed-failed{
+color:#ef4444;
+font-weight:600;
+}
+
+@keyframes scrollFeed{
+
+0%{
+transform:translateX(100%);
+}
+
+100%{
+transform:translateX(-100%);
+}
+
+}
+
+.live-feed{
+overflow:hidden;
+background:#0f172a;
+border-radius:10px;
+padding:12px 0;
+position:relative;
+height:40px;
+display:flex;
+align-items:center;
+}
+
+.feed-track{
+display:flex;
+gap:50px;
+white-space:nowrap;
+color:white;
+font-size:14px;
+padding-left:20px;
+animation:scrollFeed 25s linear infinite;
+}
+
+.feed-item{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.feed-success{
+color:#22c55e;
+font-weight:600;
+}
+
+.feed-failed{
+color:#ef4444;
+font-weight:600;
+}
+
+@keyframes scrollFeed{
+
+0%{
+transform:translateX(0);
+}
+
+100%{
+transform:translateX(-100%);
+}
+
+}
+.sidebar-logo
+{
+    width:150px;
+    height:auto;
+    display:block;
+    margin:10px auto;
+}
+
+
+
+.sidebar-footer
+{
+    margin-top:auto;
+    text-align:center;
+    padding:15px;
+    font-size:13px;
+    color:#8a99b5;
+    border-top:1px solid rgba(255,255,255,.05);
+}
+
+.logout-btn{
+display:flex;
+align-items:center;
+gap:8px;
+
+padding:8px 18px;
+
+border-radius:30px;
+
+background:linear-gradient(135deg,#ff4d4d,#dc2626);
+
+color:white;
+font-weight:600;
+font-size:14px;
+
+text-decoration:none;
+
+box-shadow:0 6px 18px rgba(220,38,38,.35);
+
+transition:all .25s ease;
+}
+
+.logout-btn i{
+font-size:15px;
+}
+
+.logout-btn:hover{
+transform:translateY(-2px);
+box-shadow:0 10px 25px rgba(220,38,38,.45);
+background:linear-gradient(135deg,#ef4444,#b91c1c);
+}
+
+.dash-card{
+
+position:relative;
+padding:28px;
+border-radius:20px;
+
+color:white;
+
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,0.25);
+
+box-shadow:
+0 15px 45px rgba(0,0,0,.15),
+inset 0 1px 2px rgba(255,255,255,.35);
+
+transition:all .35s ease;
+
+overflow:hidden;
+
+}
+
+.dash-card:hover{
+
+transform:translateY(-6px) scale(1.02);
+
+box-shadow:
+0 25px 60px rgba(0,0,0,.25),
+inset 0 1px 3px rgba(255,255,255,.4);
+
+}
+
+.dash-card:hover{
+
+transform:translateY(-6px) scale(1.02);
+
+box-shadow:
+0 25px 60px rgba(0,0,0,.25),
+inset 0 1px 3px rgba(255,255,255,.4);
+
+}
+
+.dash-card::before{
+content:"";
+position:absolute;
+top:-40%;
+left:-40%;
+width:180%;
+height:180%;
+background:rgba(255,255,255,.08);
+transform:rotate(25deg);
+pointer-events:none;
+}
+
+.health-item{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:14px 0;
+
+border-bottom:1px solid rgba(0,0,0,.06);
+
+font-size:14px;
+
+}
+
+.health-item:last-child{
+border-bottom:none;
+}
+
+.health-ok{
+
+color:#22c55e;
+font-weight:600;
+
+}
+
+.health-warning{
+
+color:#f59e0b;
+font-weight:600;
+
+}
+
+.health-error{
+
+color:#ef4444;
+font-weight:600;
+
+}
+
+
+/* LOAD CIRCLES */
+
+.load-box{
+text-align:center;
+}
+
+.load-circle{
+
+width:95px;
+height:95px;
+
+border-radius:50%;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+margin:auto;
+
+font-weight:700;
+
+font-size:20px;
+
+color:white;
+
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+}
+
+.cpu{
+background:linear-gradient(135deg,#3b82f6,#1e40af);
+}
+
+.ram{
+background:linear-gradient(135deg,#22c55e,#166534);
+}
+
+.txn{
+background:linear-gradient(135deg,#f97316,#c2410c);
+}
+
+.welcome{
+    margin-right:auto; /* pushes everything else to right */
+    font-weight:500;
+}
+</style>
+
+</head>
+
+<body>
+
+<form runat="server">
+
+<!-- ===== SIDEBAR ===== -->
+
+<div class="sidebar">
+
+<div class="logo">
+    <img src="../assets/logo/paybingo_transparent1.png" class="sidebar-logo" />
+</div>
+
+<a href="AdminDashboard.aspx">
+<i class="fa fa-home"></i>
+<span>Dashboard</span>
+</a>
+
+        
+
+<!-- ADMIN -->
+
+<div class="menu-title">Admin</div>
+
+<a href="javascript:void(0)" onclick="toggleMenu(this,'adminMenu')" class="menu-link">
+    <i class="fa fa-user-shield"></i>
+    <span>Admin Management</span>
+    <i class="fa fa-chevron-down ms-auto arrow"></i>
+</a>
+
+<div id="adminMenu" class="submenu">
+
+    <a href="CreateAdmin.aspx">
+        <i class="fa fa-user-plus"></i>
+        <span>Create Admin</span>
+    </a>
+
+    <a href="AdminList.aspx">
+        <i class="fa fa-users"></i>
+        <span>Admin List</span>
+    </a>
+
+
+    <a href="RetailerTransaction.aspx">
+        <i class="fa fa-store"></i>
+        <span>Retailer Transaction</span>
+    </a>
+
+    <a href="AdminWallet.aspx">
+        <i class="fa fa-wallet"></i>
+        <span>Admin Wallet</span>
+    </a>
+
+</div>
+
+<!-- BANK USERS -->
+
+<div class="menu-title">Bank Users</div>
+
+<a href="javascript:void(0)" onclick="toggleMenu(this,'bankMenu')">
+<i class="fa fa-building-columns"></i>
+<span>User Management</span>
+<i class="fa fa-chevron-down ms-auto arrow"></i>
+</a>
+
+<div id="bankMenu" class="submenu">
+
+<a href="CreateUser.aspx">
+<i class="fa fa-user-plus"></i>
+<span>Create Bank User</span>
+</a>
+
+<a href="BankUserList.aspx">
+<i class="fa fa-users"></i>
+<span>Bank User List</span>
+</a>
+
+    <a href="CreateBank.aspx">
+        <i class="fa fa-bank"></i>
+        <span>Create Bank</span>
+    </a>
+
+</div>
+
+    <!-- FINANCE -->
+
+<div class="menu-title">Finance</div>
+
+<a href="javascript:void(0)" onclick="toggleMenu(this,'financeMenu')">
+<i class="fa fa-money-bill-transfer"></i>
+<span>Transactions</span>
+<i class="fa fa-chevron-down ms-auto arrow"></i>
+</a>
+
+<div id="financeMenu" class="submenu">
+
+<a href="AdminTransactions.aspx">
+<i class="fa fa-list"></i>
+<span>All Transactions</span>
+</a>
+
+<a href="SettlementManager.aspx">
+<i class="fa fa-hand-holding-dollar"></i>
+<span>Settlement Manager</span>
+</a>
+
+    <a href="WithdrawalApproval.aspx">
+        <i class="fa fa-list"></i>
+        <span>Admin Withdrwal approval</span>
+    </a>
+
+<a href="Reports.aspx">
+<i class="fa fa-chart-line"></i>
+<span>Reports</span>
+</a>
+
+
+   
+
+</div>
+    <div class="menu-title">System</div>
+
+<a href="javascript:void(0)" onclick="toggleMenu(this,'systemMenu')">
+    <i class="fa fa-server"></i>
+    <span>System</span>
+    <i class="fa fa-chevron-down ms-auto arrow"></i>
+</a>
+
+<div id="systemMenu" class="submenu">
+
+    <a href="ApiLogs.aspx">
+        <i class="fa fa-code"></i>
+        <span>API Logs</span>
+    </a>
+
+    <a href="LoginLogs.aspx">
+        <i class="fa fa-shield"></i>
+        <span>Login Logs</span>
+    </a>
+
+    <a href="IPWhitelist.aspx">
+        <i class="fa fa-network-wired"></i>
+        <span>IP Whitelist</span>
+    </a>
+
+</div>
+
+<a href="../Index.aspx?logout=1">
+<i class="fa fa-sign-out-alt"></i>
+<span>Logout</span>
+</a>
+    <div class="sidebar-footer">
+
+PayBingo © 2026
+
+</div>
+
+
+    </div>
+<!-- ===== HEADER ===== -->
+
+<div class="header">
+    <i class="fa fa-bars" id="toggleSidebar" style="cursor:pointer;"></i>
+
+<div class="welcome">
+    Welcome <asp:Label ID="lblUser" runat="server"></asp:Label>
+</div>
+
+<div class="header-right">
+    <input type="text" class="search-input" placeholder="Search">
+
+    <a href="../Home.aspx?logout=1" class="logout-btn">
+<i class="fa-solid fa-right-from-bracket"></i> Logout
+</a>
+</div>
+
+</div>
+
+
+
+<!--  CONTENT  -->
+
+<div class="content">
+
+<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+
+</div>
+
+</form>
+
+<script>
+
+    // ===== SIDEBAR TOGGLE =====
+    const sidebar = document.querySelector(".sidebar");
+    const body = document.body;
+
+    document.getElementById("toggleSidebar").onclick = function () {
+        sidebar.classList.toggle("collapsed");
+        body.classList.toggle("collapsed-layout");
+
+        localStorage.setItem("sidebar",
+            sidebar.classList.contains("collapsed") ? "closed" : "open");
+    };
+
+    // Load state
+    window.addEventListener("load", () => {
+        if (localStorage.getItem("sidebar") === "closed") {
+            sidebar.classList.add("collapsed");
+            body.classList.add("collapsed-layout");
+        }
+    });
+
+    // ===== SUBMENU =====
+    function toggleMenu(el, menuId) {
+
+        let menu = document.getElementById(menuId);
+
+        document.querySelectorAll(".submenu").forEach(m => {
+            if (m !== menu) m.classList.remove("show");
+        });
+
+        document.querySelectorAll(".arrow").forEach(a => {
+            if (a !== el.querySelector(".arrow")) a.classList.remove("rotate");
+        });
+
+        menu.classList.toggle("show");
+        el.querySelector(".arrow").classList.toggle("rotate");
+    }
+
+    // ===== ACTIVE MENU =====
+    document.querySelectorAll(".sidebar a").forEach(link => {
+
+        let href = link.getAttribute("href");
+
+        if (href && window.location.pathname.toLowerCase().includes(href.toLowerCase())) {
+
+            link.classList.add("active");
+
+            let parent = link.closest(".submenu");
+            if (parent) {
+                parent.classList.add("show");
+
+                let arrow = parent.previousElementSibling.querySelector(".arrow");
+                if (arrow) arrow.classList.add("rotate");
+            }
+        }
+    });
+
+</script>
+</body>
+</html>
