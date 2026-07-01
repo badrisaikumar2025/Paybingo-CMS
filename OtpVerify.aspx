@@ -46,126 +46,98 @@
                 backdrop-filter:blur(28px);
                 -webkit-backdrop-filter:blur(28px);
                 border:1px solid rgba(255,255,255,0.18);
+                box-shadow:0 30px 80px rgba(0,0,0,.65),
+                    inset 0 1px 0 rgba(255,255,255,.15);
+                animation:fadeUp .5s ease;
 
-box-shadow:
-0 30px 80px rgba(0,0,0,.65),
-inset 0 1px 0 rgba(255,255,255,.15);
+            }
+            
+            /* LOGO */
+            
+            .logo{
+                width:280px;
+                height:140px;
+                object-fit:contain;
+                display:block;
+                margin:0 auto 20px auto;
 
-animation:fadeUp .5s ease;
+            }
+            
+            /* TEXT */
+            h2{
+                margin-bottom:8px;
+                font-weight:700;
+                color:#ffffff;
+                letter-spacing:.5px;
 
-}
+            }
+            
+            p{
+                color:#cbd5f5;
+                font-size:14px;
+                margin-bottom:10px;
 
+            }
+            /* OTP */
+            
+            .otp-boxes{
+                display:flex;
+                justify-content:center;
+                gap:12px;
+                margin-top:28px;
 
+            }
+            
+            .otp-input{
+                width:55px;
+                height:65px;
+                font-size:26px;
+                font-weight:700;
+                text-align:center;
+                border-radius:14px;
+                border:1px solid rgba(255,255,255,.25);
+                background:rgba(255,255,255,.12);
+                color:white;
+                transition:.25s;
 
-/* LOGO */
+            }
+            
+            .otp-input:focus{
+                outline:none;
+                border-color:#3b82f6;
+                box-shadow:0 0 18px rgba(59,130,246,.7);
+                transform:scale(1.05);
+                background:rgba(255,255,255,.18);
 
-.logo{
-width:280px;
-height:140px;
-object-fit:contain;
-display:block;
-margin:0 auto 20px auto;
-}
+            }
+            
+            /* BUTTON */
+            
+            button{
+                
+                width:100%;
+                height:54px;
+                margin-top:32px;
+                border:none;
+                border-radius:14px;
+                background:linear-gradient(135deg,#3b82f6,#2563eb);
+                color:white;
+                font-size:18px;
+                font-weight:600;
+                cursor:pointer;
+                transition:.3s;
 
-/* TEXT */
+            }
+            
+            button:hover{
+                transform:translateY(-2px);
+                box-shadow:0 20px 40px rgba(37,99,235,.45);
 
-h2{
-margin-bottom:8px;
-font-weight:700;
-color:#ffffff;
-letter-spacing:.5px;
-}
+            }
+            button:active{
+                transform:scale(.97);
 
-p{
-color:#cbd5f5;
-font-size:14px;
-margin-bottom:10px;
-}
-
-/* OTP */
-
-.otp-boxes{
-display:flex;
-justify-content:center;
-gap:12px;
-margin-top:28px;
-}
-
-.otp-input{
-
-width:55px;
-height:65px;
-
-font-size:26px;
-font-weight:700;
-
-text-align:center;
-
-border-radius:14px;
-
-border:1px solid rgba(255,255,255,.25);
-
-background:rgba(255,255,255,.12);
-
-color:white;
-
-transition:.25s;
-
-}
-
-
-.otp-input:focus{
-
-outline:none;
-
-border-color:#3b82f6;
-
-box-shadow:0 0 18px rgba(59,130,246,.7);
-
-transform:scale(1.05);
-
-background:rgba(255,255,255,.18);
-
-}
-
-/* BUTTON */
-
-button{
-
-width:100%;
-height:54px;
-
-margin-top:32px;
-
-border:none;
-border-radius:14px;
-
-background:linear-gradient(135deg,#3b82f6,#2563eb);
-
-color:white;
-
-font-size:18px;
-font-weight:600;
-
-cursor:pointer;
-
-transition:.3s;
-
-}
-
-
-button:hover{
-
-transform:translateY(-2px);
-
-box-shadow:0 20px 40px rgba(37,99,235,.45);
-
-}
-
-
-button:active{
-transform:scale(.97);
-}
+            }
 
 
 /* ANIMATION */
