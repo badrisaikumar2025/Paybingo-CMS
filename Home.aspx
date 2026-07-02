@@ -793,7 +793,7 @@
 
             <div>
 
-                <h1>WelcomeSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</h1>
+                <h1>Welcome</h1>
 
                 <p>
                     Secure CMS platform for managing banking operations,
