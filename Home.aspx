@@ -126,6 +126,7 @@
                 transform: translateY(-4px) scale(1.05);
                 box-shadow: 0 20px 45px rgba(34,197,94,0.6);
             }
+
         /* STATS */
         .stats {
             padding: 120px 60px;
@@ -647,35 +648,35 @@
         /* OTP POPUP CARD */
         
         .otp-popup-card {
-    background: rgba(15,23,42,0.85) !important;
-    backdrop-filter: blur(30px) !important;
-    border-radius: 22px !important;
-    padding: 40px 25px !important;
-    border: 1px solid rgba(56,189,248,0.25) !important;
+        background: rgba(15,23,42,0.85) !important;
+        backdrop-filter: blur(30px) !important;
+        border-radius: 22px !important;
+        padding: 40px 25px !important;
+        border: 1px solid rgba(56,189,248,0.25) !important;
 
-    box-shadow:
-        0 30px 90px rgba(0,0,0,0.8),
-        0 0 35px rgba(56,189,248,0.25);
-}
+        box-shadow:
+              0 30px 90px rgba(0,0,0,0.8),
+              0 0 35px rgba(56,189,248,0.25);
+        }
 
-/* ICON */
+        /* ICON */
 
-.otp-icon {
-    width: 90px;
-    height: 90px;
-    margin: 0 auto 20px;
+        .otp-icon {
+          width: 90px;
+          height: 90px;
+          margin: 0 auto 20px;
 
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
 
-    background: rgba(34,197,94,0.15);
-    color: #22c55e;
+          background: rgba(34,197,94,0.15);
+          color: #22c55e;
+     
+          font-size: 40px;
 
-    font-size: 40px;
-
-    box-shadow:
+          box-shadow:
         0 0 25px rgba(34,197,94,0.5),
         inset 0 0 15px rgba(34,197,94,0.2);
 

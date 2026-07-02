@@ -24,7 +24,7 @@ public partial class Home : System.Web.UI.Page
         }
     }
 
-    //  FIXED METHOD
+    //  FIXED METHOD my method to load stats from the database  
     void LoadStats()
     {
         try
