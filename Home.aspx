@@ -271,7 +271,7 @@
             transition: .4s;
             transform: scale(.85);
             opacity: 0;
-         }
+        }
 
            .login-overlay.show .login-card {
               transform: scale(1);
@@ -289,7 +289,7 @@
 
             .inputBox {
                margin-bottom: 20px;
-           }
+            }
 
             .inputBox input {
                 width: 100%;
@@ -307,6 +307,7 @@
             background: linear-gradient(135deg,#2563eb,#1e40af);
             color: white;
             font-weight: 600;
+
         }
 
         /* TITLE */
@@ -792,7 +793,7 @@
 
             <div>
 
-                <h1>Welcome</h1>
+                <h1>WelcomeSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</h1>
 
                 <p>
                     Secure CMS platform for managing banking operations,
