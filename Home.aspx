@@ -885,7 +885,7 @@
         </section>
 
 
-        <!-- FOOTER -->
+        
 
         <!-- MODERN FOOTER -->
 
